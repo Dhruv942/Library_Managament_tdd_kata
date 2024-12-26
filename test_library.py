@@ -36,19 +36,19 @@ class LibraryTestCase(unittest.TestCase):
             self.library.return_book(book.isbn)
     
 
-    def test_view_all_books(self):
-        book1 = Book(isbn="1234567890", title="Python", author="shubhash", year=2015)
-        book2 = Book(isbn="0987654321", title="Java", author="kartik", year=2020)
-        self.library.add_book(book1)
-        self.library.add_book(book2)
-        
-        all_books = [(book.isbn, book.title, book.author, book.year) for book in self.library.books]
-        expected_books = [
-            ("1234567890", "Python", "shubhash", 2015),
-            ("0987654321", "Java", "kartik", 2020)
-        ]
-        
-        self.assertEqual(all_books, expected_books)
+    def test_get_available_books_single_book(self):
+        book = Book(isbn="1234567890", title="Python 101", author="Alice", year=2015)
+
+    
+        self.library.add_book(book)
+
+
+        available_books = self.library.get_available_books()
+
+    
+        self.assertEqual(len(available_books), 1)  
+        self.assertIn(book, available_books)
+
              
 
 if __name__ == '__main__':
