@@ -12,5 +12,11 @@ class LibraryTestCase(unittest.TestCase):
         self.library.add_book(book)
         self.assertEqual(self.library.books[0].isbn, '1234567890')
 
+    def test_borrowbook(self):
+        book = Book(isbn="1234567890", title="c++", author="bde", year=2010)
+        self.library.add_book(book)
+        self.library.borrow_book(book.isbn)
+        self.assertTrue(book.is_borrowed)
+
 if __name__ == '__main__':
     unittest.main()
