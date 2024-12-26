@@ -28,7 +28,12 @@ class LibraryTestCase(unittest.TestCase):
         self.library.borrow_book(book.isbn)
         self.library.return_book(book.isbn)
         self.assertFalse(book.is_borrowed)
-
+    
+    def test_return_book_not_borrowed(self):
+        book = Book(isbn="1234567890", title="snake", author="abc", year=1958)
+        self.library.add_book(book)
+        with self.assertRaises(ValueError):
+            self.library.return_book(book.isbn)
 
 if __name__ == '__main__':
     unittest.main()
